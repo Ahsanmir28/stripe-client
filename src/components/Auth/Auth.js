@@ -13,6 +13,8 @@ import Input from "./input";
 import { signin, signup } from "../../actions/auth";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+// import { auth } from "../../reducer/index";
+// console.log(auth);
 
 const initialValue = {
   firstName: "",
@@ -29,6 +31,8 @@ const Auth = () => {
   const [formData, setFormData] = useState(initialValue);
   const dispatch = useDispatch();
   const history = useHistory();
+  // const { authData } = useReducer();
+  // console.log(authData);
 
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);

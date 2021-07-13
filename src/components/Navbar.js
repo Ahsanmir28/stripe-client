@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// import React, { useReducer } from "react";
+import React from "react";
+
 import {
   AppBar,
   Toolbar,
@@ -10,6 +12,13 @@ import {
 import { useDispatch } from "react-redux";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import * as actionType from "../constants/actionTypes.js";
+// import initialState from "../reducer/auth";
+// console.log(initialState);
+// import state from "../reducer/auth";
+// import authReducer from "../reducer/auth";
+import { useSelector } from "react-redux";
+
+// import { reducers } from "../reducer/index.js";
 
 const useStyle = makeStyles({
   header: {
@@ -58,17 +67,22 @@ const useStyle = makeStyles({
 
 const NavBar = () => {
   const classes = useStyle();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
+  // const [authData] = useReducer(reducers);
+  // console.log(authData);
+  const user = useSelector((state) => state.reducers);
+  console.log(user);
+
+  const history = useHistory();
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
 
     history.push("/");
 
-    setUser(null);
+    // setUser(null);
   };
   return (
     <AppBar position="static" className={classes.header}>
@@ -83,17 +97,17 @@ const NavBar = () => {
           Create Coupon
         </NavLink>
         <Toolbar className={classes.toolbar}>
-          {user?.result ? (
+          {user.auth.authData?.result ? (
             <div className={classes.profile}>
               <Avatar
                 className={classes.purple}
-                alt={user?.result.name}
-                src={user?.result.imageUrl}
+                alt={user.auth.authData.result?.name}
+                src={user.auth.authData.result?.imageUrl}
               >
-                {user?.result.name.charAt(0)}
+                {user.auth.authData.result?.name.charAt(0)}
               </Avatar>
               <Typography className={classes.userName} variant="h6">
-                {user?.result.name}
+                {user.auth.authData.result?.name}
               </Typography>
               <Button
                 variant="contained"
