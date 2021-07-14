@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 const initialValue = {
   name: "",
   percent_off: "",
-  duration: "",
+  duration: "repeating",
   duration_in_months: "",
 };
 

@@ -40,8 +40,6 @@ const config = {
 const reducer = persistCombineReducers(config, { reducers });
 
 export const configureStore = () => {
-  //   const store = createStore(reducer, composeWithDevTools, middleware)
-
   const store = createStore(
     reducer,
     composeWithDevTools(applyMiddleware(thunk))
