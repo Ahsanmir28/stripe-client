@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import NotFound from "./components/NotFound";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ListAllCoupons from "./components/components-stripe/ListAllCoupons";
-import AddCoupons from "./components/components-stripe/AddCoupons";
+import ListAllCoupons from "./components/coupons/ListAllCoupons";
+import AddCoupons from "./components/coupons/AddCoupons";
 import Home from "./components/Home";
-import Auth from "./components/Auth/Auth";
 import ProtectedRoute from "react-protected-route-component";
 import { useSelector } from "react-redux";
+import SignUp from "./components/register/SignUp";
+import SignIn from "./components/login/SignIn";
 
 function App() {
   const user = useSelector((state) => state.reducers);
@@ -21,7 +21,7 @@ function App() {
         <ProtectedRoute
           exact
           path="/get-stripe-coupons"
-          redirectRoute="/auth"
+          redirectRoute="/signin-auth"
           guardFunction={() => {
             if (user.auth.authData == null) {
               return false;
@@ -34,7 +34,7 @@ function App() {
         <ProtectedRoute
           exact
           path="/create-stripe-coupons"
-          redirectRoute="/auth"
+          redirectRoute="/signin-auth"
           guardFunction={() => {
             if (user.auth.authData == null) {
               return false;
@@ -44,8 +44,8 @@ function App() {
           }}
           component={AddCoupons}
         />
-        <Route exact path="/auth" component={Auth} />
-        <Route component={NotFound} />
+        <Route exact path="/signup-auth" component={SignUp} />
+        <Route exact path="/signin-auth" component={SignIn} />
       </Switch>
     </BrowserRouter>
   );

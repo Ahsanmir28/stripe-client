@@ -12,13 +12,7 @@ import {
 import { useDispatch } from "react-redux";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import * as actionType from "../constants/actionTypes.js";
-// import initialState from "../reducer/auth";
-// console.log(initialState);
-// import state from "../reducer/auth";
-// import authReducer from "../reducer/auth";
 import { useSelector } from "react-redux";
-
-// import { reducers } from "../reducer/index.js";
 
 const useStyle = makeStyles({
   header: {
@@ -67,12 +61,9 @@ const useStyle = makeStyles({
 
 const NavBar = () => {
   const classes = useStyle();
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const dispatch = useDispatch();
 
-  // const [authData] = useReducer(reducers);
-  // console.log(authData);
   const user = useSelector((state) => state.reducers);
   console.log(user);
 
@@ -81,8 +72,6 @@ const NavBar = () => {
     dispatch({ type: actionType.LOGOUT });
 
     history.push("/");
-
-    // setUser(null);
   };
   return (
     <AppBar position="static" className={classes.header}>
@@ -119,15 +108,26 @@ const NavBar = () => {
               </Button>
             </div>
           ) : (
-            <Button
-              component={Link}
-              exact
-              to="/auth"
-              variant="contained"
-              color="primary"
-            >
-              Sign In
-            </Button>
+            <div>
+              <Button
+                component={Link}
+                exact
+                to="/signin-auth"
+                variant="contained"
+                color="secondary"
+              >
+                Login
+              </Button>
+              <Button
+                component={Link}
+                exact
+                to="/signup-auth"
+                variant="contained"
+                color="primary"
+              >
+                Sign Up
+              </Button>
+            </div>
           )}
         </Toolbar>
       </Toolbar>
