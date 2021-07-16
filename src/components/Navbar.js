@@ -8,15 +8,17 @@ import {
   Typography,
   Avatar,
   Button,
+  ClickAwayListener,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import * as actionType from "../constants/actionTypes.js";
 import { useSelector } from "react-redux";
+// import Grid from "@material-ui/core/Grid";
 
 const useStyle = makeStyles({
   header: {
-    background: "#111111",
+    background: "#303030",
   },
   tabs: {
     color: "#FFFFFF",
@@ -42,7 +44,9 @@ const useStyle = makeStyles({
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
-    width: "400px",
+    width: "70%",
+
+    // flexDirection: "row-reverse",
   },
   profile: {
     display: "flex",
@@ -56,6 +60,34 @@ const useStyle = makeStyles({
   brandContainer: {
     display: "flex",
     alignItems: "center",
+  },
+  tr: {
+    color: "#FFFFFF",
+    marginRight: 20,
+    textDecoration: "none",
+    fontSize: 20,
+    background: "#303030",
+    "&:hover": {
+      color: "#21CBF3",
+    },
+  },
+  btn1: {
+    background: "#303030",
+    border: "2px solid #21CBF3",
+    "&:hover": {
+      background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+    },
+    color: "white",
+    marginRight: "10px",
+    width: "96.3px",
+  },
+  btn2: {
+    background: "#303030",
+    border: "2px solid #21CBF3",
+    "&:hover": {
+      background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+    },
+    color: "white",
   },
 });
 
@@ -76,14 +108,17 @@ const NavBar = () => {
   return (
     <AppBar position="static" className={classes.header}>
       <Toolbar>
-        <NavLink className={classes.tabs} to="./" exact>
-          Home
+        <NavLink className={classes.tr} to="./" exact>
+          HOME
         </NavLink>
-        <NavLink className={classes.tabs} to="/get-stripe-coupons" exact>
-          List All Coupons
-        </NavLink>
-        <NavLink className={classes.tabs} to="/create-stripe-coupons" exact>
-          Create Coupon
+
+        <ClickAwayListener>
+          <NavLink className={classes.tr} to="/get-stripe-coupons" exact>
+            COUPONS
+          </NavLink>
+        </ClickAwayListener>
+        <NavLink className={classes.tr} to="/create-stripe-coupons" exact>
+          CREATE COUPON
         </NavLink>
         <Toolbar className={classes.toolbar}>
           {user.auth.authData?.result ? (
@@ -110,20 +145,20 @@ const NavBar = () => {
           ) : (
             <div>
               <Button
+                className={classes.btn1}
                 component={Link}
                 exact
                 to="/signin-auth"
                 variant="contained"
-                color="secondary"
               >
                 Login
               </Button>
               <Button
+                className={classes.btn2}
                 component={Link}
                 exact
                 to="/signup-auth"
                 variant="contained"
-                color="primary"
               >
                 Sign Up
               </Button>
